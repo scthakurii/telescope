@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telescope Monitoring Dashboard</title>
+    <script>
+        function fetchTelescopeData() {
+            fetch('/api/telescope_data')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("temperature").innerText = data.temperature + " °C";
+                    document.getElementById("alignment").innerText = data.alignment;
+                    document.getElementById("status").innerText = data.status;
+                });
+        }
+        setInterval(fetchTelescopeData, 3000);  // Fetch new data every 3 seconds
+    </script>
+</head>
+<body>
+    <h1>Telescope Monitoring Dashboard</h1>
+    <div>
+        <p><strong>Temperature:</strong> <span id="temperature">Loading...</span></p>
+        <p><strong>Alignment Status:</strong> <span id="alignment">Loading...</span></p>
+        <p><strong>Status:</strong> <span id="status">Loading...</span></p>
+    </div>
+</body>
+</html>
